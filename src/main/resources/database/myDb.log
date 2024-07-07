@@ -1,5 +1,7 @@
 /*C12*/SET SCHEMA PUBLIC
 SET SCHEMA "PUBLIC"
+INSERT INTO EVENTS VALUES('d5c2cda0-c3ee-4ea6-aceb-30475ce350e5','Filme com Velez','O filme ser\u00e1 iniciado de 19h da noite','filmecomvelez',2)
+COMMIT
 DISCONNECT
 /*C13*/SET SCHEMA PUBLIC
 DISCONNECT
