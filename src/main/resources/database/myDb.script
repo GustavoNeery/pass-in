@@ -29,7 +29,7 @@ SET FILES NIO TRUE
 SET FILES NIO SIZE 256
 SET FILES LOG TRUE
 SET FILES LOG SIZE 50
-SET FILES CHECK 738
+SET FILES CHECK 848
 SET DATABASE COLLATION "SQL_TEXT" PAD SPACE
 CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER SA SET LOCAL TRUE
@@ -58,3 +58,4 @@ INSERT INTO "flyway_schema_history" VALUES(1,'1','create-table-events','SQL','V1
 INSERT INTO "flyway_schema_history" VALUES(2,'2','create-table-attendees','SQL','V2__create-table-attendees.sql',-1224932415,'SA','2024-07-01 20:00:11.412181',19,'1')
 INSERT INTO "flyway_schema_history" VALUES(3,'3','create-table-checkins','SQL','V3__create-table-checkins.sql',-1498936546,'SA','2024-07-01 20:00:11.434210',4,'1')
 INSERT INTO "flyway_schema_history" VALUES(4,'4','create-indexes','SQL','V4__create-indexes.sql',-266755805,'SA','2024-07-01 20:00:11.445121',1,'1')
+INSERT INTO EVENTS VALUES('d5c2cda0-c3ee-4ea6-aceb-30475ce350e5','Filme com Velez','O filme ser\u00e1 iniciado de 19h da noite','filmecomvelez',2)
