@@ -28,7 +28,7 @@ public class EventController {
     public ResponseEntity<EventIdDTO> createEvent(@RequestBody EventRequestDTO body, UriComponentsBuilder uriComponentsBuilder){
         EventIdDTO eventIdDTO = this.service.createEvent(body);
 
-        var uri = uriComponentsBuilder.path("/events/{id}").buildAndExpand(eventIdDTO.eventId()).toUri();
+        var uri = uriComponentsBuilder.path("/events/{eventId}").buildAndExpand(eventIdDTO.eventId()).toUri();
 
         return ResponseEntity.created(uri).body(eventIdDTO);
     }

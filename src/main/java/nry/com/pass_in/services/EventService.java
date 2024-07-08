@@ -4,10 +4,10 @@ package nry.com.pass_in.services;
 import lombok.RequiredArgsConstructor;
 import nry.com.pass_in.domain.attendee.Attendee;
 import nry.com.pass_in.domain.event.Event;
+import nry.com.pass_in.domain.event.exceptions.EventNotFoundException;
 import nry.com.pass_in.dto.event.EventIdDTO;
 import nry.com.pass_in.dto.event.EventRequestDTO;
 import nry.com.pass_in.dto.event.EventResponseDTO;
-import nry.com.pass_in.repositories.AttendeeRepository;
 import nry.com.pass_in.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +21,10 @@ public class EventService {
 
     @Autowired
     private EventRepository eventRepository;
-    @Autowired
-    private AttendeeRepository attendeeRepository;
+    private final AttendeeService attendeeService;
     public EventResponseDTO getEventDetail(String eventId){
-        Event event = this.eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Event not found with ID: " + eventId));
-        List<Attendee> attendeeList = this.attendeeRepository.findByEventId(eventId);
+        Event event = this.eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException("Event not found with ID: " + eventId));
+        List<Attendee> attendeeList = this.attendeeService.getAllAttendeesFromEvent(eventId);
         return new EventResponseDTO(event, attendeeList.size());
     }
 
