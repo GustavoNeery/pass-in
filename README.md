@@ -6,7 +6,7 @@ Projeto simples em desenvolvimento de uma API REST de relização de eventos des
 
 <h3> 🔰 Rotas </h3>
 
-<h4>🚏 `/events`</h4>
+<h4>🚏 /events </h4>
 
  `/ POST` : Criar um evento.
 
