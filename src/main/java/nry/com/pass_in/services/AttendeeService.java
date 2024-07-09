@@ -2,13 +2,13 @@ package nry.com.pass_in.services;
 
 import lombok.RequiredArgsConstructor;
 import nry.com.pass_in.domain.attendee.Attendee;
+import nry.com.pass_in.domain.attendee.exceptions.AttendeeAlreadyExistException;
 import nry.com.pass_in.domain.checkIn.CheckIn;
 import nry.com.pass_in.dto.attendee.AttendeeDetailDTO;
 import nry.com.pass_in.dto.attendee.AttendeeIdDTO;
 import nry.com.pass_in.dto.attendee.AttendeeListResponseDTO;
 import nry.com.pass_in.repositories.AttendeeRepository;
 import nry.com.pass_in.repositories.CheckInRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,10 +19,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AttendeeService {
 
-    @Autowired
     private final AttendeeRepository attendeeRepository;
-    @Autowired
-    private CheckInRepository checkInRepository;
+    private final CheckInRepository checkInRepository;
+
     public List<Attendee> getAllAttendeesFromEvent(String eventId){
         return this.attendeeRepository.findByEventId(eventId);
     }
@@ -50,4 +49,16 @@ public class AttendeeService {
         this.attendeeRepository.save(newAttendee);
         return new AttendeeIdDTO(newAttendee.getId());
     }
+
+    public void verifyAttendeeSubscription(String email, String eventId){
+        Optional<Attendee> isAttendeeRegistered = this.attendeeRepository.findByEventIdAndEmail(eventId, email);
+        if(isAttendeeRegistered.isPresent()) throw new AttendeeAlreadyExistException("Attendee is already registered");
+    }
+
+    public Attendee registerAnttedee(Attendee newAttendee){
+        this.attendeeRepository.save(newAttendee);
+        return newAttendee;
+    }
 }
+
+//21:27

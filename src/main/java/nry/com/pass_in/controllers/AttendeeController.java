@@ -18,8 +18,8 @@ public class AttendeeController {
     @Autowired
     private final AttendeeService service;
 
-    @GetMapping("/{attendeeId}")
-    public ResponseEntity<String> getAttendee(@PathVariable String attendeeId){
+    @GetMapping("/attendee/{id}")
+    public ResponseEntity<String> getEventAttendees(@PathVariable String attendeeId){
         this.service.getAllAttendeesFromEvent(attendeeId);
         return ResponseEntity.ok("Sucesso!");
     }
