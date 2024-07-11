@@ -1,7 +1,10 @@
 package nry.com.pass_in.controllers;
 
 import lombok.RequiredArgsConstructor;
+import nry.com.pass_in.domain.attendee.Attendee;
+import nry.com.pass_in.dto.attendee.AttendeeIdDTO;
 import nry.com.pass_in.dto.attendee.AttendeeListResponseDTO;
+import nry.com.pass_in.dto.attendee.AttendeeRequestDTO;
 import nry.com.pass_in.dto.event.EventIdDTO;
 import nry.com.pass_in.dto.event.EventRequestDTO;
 import nry.com.pass_in.dto.event.EventResponseDTO;
@@ -36,6 +39,15 @@ public class EventController {
         var uri = uriComponentsBuilder.path("/events/{eventId}").buildAndExpand(eventIdDTO.eventId()).toUri();
 
         return ResponseEntity.created(uri).body(eventIdDTO);
+    }
+
+    @PostMapping("/{eventId}/attendees")
+    public ResponseEntity<AttendeeIdDTO> registerParticipant(@PathVariable String eventId, @RequestBody AttendeeRequestDTO body, UriComponentsBuilder uriComponentsBuilder){
+        AttendeeIdDTO attendeeIdDTO = this.eventService.registerAttendeeOnEvent(eventId, body);
+
+        var uri = uriComponentsBuilder.path("/attendees/{attendeeId}/badge").buildAndExpand(attendeeIdDTO.attendeeId()).toUri();
+
+        return ResponseEntity.created(uri).body(attendeeIdDTO);
     }
 
     @GetMapping("/attendees/{id}")

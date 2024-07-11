@@ -2,6 +2,7 @@ package nry.com.pass_in.controllers;
 
 import lombok.RequiredArgsConstructor;
 import nry.com.pass_in.domain.attendee.Attendee;
+import nry.com.pass_in.dto.attendee.AttendeeBadgeResponseDTO;
 import nry.com.pass_in.dto.attendee.AttendeeIdDTO;
 import nry.com.pass_in.services.AttendeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,15 @@ public class AttendeeController {
     public ResponseEntity<AttendeeIdDTO> createAttendee(@RequestBody Attendee attendee, UriComponentsBuilder uriComponentsBuilder) {
         AttendeeIdDTO attendeeIdDTO =  this.service.createAttendee(attendee);
 
-        var uri = uriComponentsBuilder.path("/attendees/{attendeeId}").buildAndExpand(attendeeIdDTO.id()).toUri();
+        var uri = uriComponentsBuilder.path("/attendees/{attendeeId}").buildAndExpand(attendeeIdDTO.attendeeId()).toUri();
 
         return ResponseEntity.created(uri).body(attendeeIdDTO);
+    }
+
+    @GetMapping("/{attendeeId}/badge")
+    public ResponseEntity<AttendeeBadgeResponseDTO> getAttendeeBadge(@PathVariable String attendeeId, UriComponentsBuilder uriComponentsBuilder){
+        AttendeeBadgeResponseDTO attendeeBadgeResponseDTO = this.service.getAttendeeeBadge(attendeeId, uriComponentsBuilder);
+        return ResponseEntity.ok().body(attendeeBadgeResponseDTO);
     }
 
 }

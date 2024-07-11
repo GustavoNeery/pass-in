@@ -3,13 +3,13 @@ package nry.com.pass_in.services;
 import lombok.RequiredArgsConstructor;
 import nry.com.pass_in.domain.attendee.Attendee;
 import nry.com.pass_in.domain.attendee.exceptions.AttendeeAlreadyExistException;
+import nry.com.pass_in.domain.attendee.exceptions.AttendeeNotFoundException;
 import nry.com.pass_in.domain.checkIn.CheckIn;
-import nry.com.pass_in.dto.attendee.AttendeeDetailDTO;
-import nry.com.pass_in.dto.attendee.AttendeeIdDTO;
-import nry.com.pass_in.dto.attendee.AttendeeListResponseDTO;
+import nry.com.pass_in.dto.attendee.*;
 import nry.com.pass_in.repositories.AttendeeRepository;
 import nry.com.pass_in.repositories.CheckInRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -59,6 +59,12 @@ public class AttendeeService {
         this.attendeeRepository.save(newAttendee);
         return newAttendee;
     }
-}
 
-//21:27
+    public AttendeeBadgeResponseDTO getAttendeeeBadge(String attendeeId, UriComponentsBuilder uriComponentsBuilder){
+        Attendee attendee = this.attendeeRepository.findById(attendeeId).orElseThrow(() -> new AttendeeNotFoundException("Attendee not found with id" + attendeeId));
+        var uri = uriComponentsBuilder.path("/attendees/{attendeeId}/check-in").buildAndExpand(attendeeId).toUri().toString();
+
+        AttendeeBadgeDTO attendeeBadgeDTO = new AttendeeBadgeDTO(attendee.getName(), attendee.getEmail(), uri, attendee.getEvent().getTitle());
+        return new AttendeeBadgeResponseDTO(attendeeBadgeDTO);
+    }
+}

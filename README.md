@@ -8,7 +8,17 @@ Projeto simples em desenvolvimento de uma API REST de relização de eventos des
 
 <h4>🚏 /events </h4>
 
- `/ POST` : Criar um evento.
+`/ POST` : Cria um evento.\
+`/ GET` : Exibe detalhes de um evento.
+
+<h4>🚏 /attendees </h4>
+
+`/ POST` : Cria um participante.
+
+<h4>🚏 /events/attendees </h4>
+`/ GET` : Exibe participantes do evento.
+
+
 
 
 
