@@ -1,7 +1,6 @@
 package nry.com.pass_in.controllers;
 
 import lombok.RequiredArgsConstructor;
-import nry.com.pass_in.domain.attendee.Attendee;
 import nry.com.pass_in.dto.attendee.AttendeeIdDTO;
 import nry.com.pass_in.dto.attendee.AttendeeListResponseDTO;
 import nry.com.pass_in.dto.attendee.AttendeeRequestDTO;

@@ -5,6 +5,7 @@ import nry.com.pass_in.domain.attendee.Attendee;
 import nry.com.pass_in.dto.attendee.AttendeeBadgeResponseDTO;
 import nry.com.pass_in.dto.attendee.AttendeeIdDTO;
 import nry.com.pass_in.services.AttendeeService;
+import nry.com.pass_in.services.CheckInService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,6 @@ public class AttendeeController {
 
     @Autowired
     private final AttendeeService service;
-
     @GetMapping("/attendee/{id}")
     public ResponseEntity<String> getEventAttendees(@PathVariable String attendeeId){
         this.service.getAllAttendeesFromEvent(attendeeId);
@@ -38,6 +38,13 @@ public class AttendeeController {
     public ResponseEntity<AttendeeBadgeResponseDTO> getAttendeeBadge(@PathVariable String attendeeId, UriComponentsBuilder uriComponentsBuilder){
         AttendeeBadgeResponseDTO attendeeBadgeResponseDTO = this.service.getAttendeeeBadge(attendeeId, uriComponentsBuilder);
         return ResponseEntity.ok().body(attendeeBadgeResponseDTO);
+    }
+
+    @PostMapping("/{attendeeId}/check-in")
+    public ResponseEntity registerCheckIn(@PathVariable String attendeeId, UriComponentsBuilder uriComponentsBuilder){
+        this.service.checkInAttendee(attendeeId);
+        var uri = uriComponentsBuilder.path("/attendees/{atttendeeId}/badge").buildAndExpand(attendeeId).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
 }
