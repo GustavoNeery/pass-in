@@ -8,22 +8,34 @@ Projeto simples em desenvolvimento de uma API REST de relização de eventos des
 
 <h4>🚏 /events </h4>
 
-`/ POST` : Cria um evento.\
+`/ POST` : Cria um evento.
+
+<h4>🚏 /events/id/attendees </h4>
+
+`/ POST` : Registra um participante em um evento.
+
+<h4>🚏 /events/id </h4>
+
 `/ GET` : Exibe detalhes de um evento.
+
+<h4>🚏 /events/attendees/id </h4>
+
+`/ GET` : Exibe participantes do evento.
 
 <h4>🚏 /attendees </h4>
 
 `/ POST` : Cria um participante.
 
-<h4>🚏 /events/attendees </h4>
-`/ GET` : Exibe participantes do evento.
+<h4>🚏 /attendees/id/check-in </h4>
+
+`/ POST` : Realiza o check-in de um participante.
+
+<h4>🚏 /attendees/id/badge </h4>
+
+`/ GET` : Exibe crachá do participante.
 
 
 
-
-
-
-\
 \
 \
 \

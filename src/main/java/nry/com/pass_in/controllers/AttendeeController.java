@@ -19,11 +19,6 @@ public class AttendeeController {
 
     @Autowired
     private final AttendeeService service;
-    @GetMapping("/attendee/{id}")
-    public ResponseEntity<String> getEventAttendees(@PathVariable String attendeeId){
-        this.service.getAllAttendeesFromEvent(attendeeId);
-        return ResponseEntity.ok("Sucesso!");
-    }
 
     @PostMapping
     public ResponseEntity<AttendeeIdDTO> createAttendee(@RequestBody Attendee attendee, UriComponentsBuilder uriComponentsBuilder) {
