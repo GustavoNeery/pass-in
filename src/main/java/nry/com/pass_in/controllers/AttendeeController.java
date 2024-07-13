@@ -23,9 +23,7 @@ public class AttendeeController {
     @PostMapping
     public ResponseEntity<AttendeeIdDTO> createAttendee(@RequestBody Attendee attendee, UriComponentsBuilder uriComponentsBuilder) {
         AttendeeIdDTO attendeeIdDTO =  this.service.createAttendee(attendee);
-
         var uri = uriComponentsBuilder.path("/attendees/{attendeeId}").buildAndExpand(attendeeIdDTO.attendeeId()).toUri();
-
         return ResponseEntity.created(uri).body(attendeeIdDTO);
     }
 
