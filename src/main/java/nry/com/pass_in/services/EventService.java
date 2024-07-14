@@ -8,14 +8,13 @@ import nry.com.pass_in.domain.event.Event;
 import nry.com.pass_in.domain.event.exceptions.EventNotFoundException;
 import nry.com.pass_in.dto.attendee.AttendeeIdDTO;
 import nry.com.pass_in.dto.attendee.AttendeeRequestDTO;
-import nry.com.pass_in.dto.event.EventIdDTO;
-import nry.com.pass_in.dto.event.EventRequestDTO;
-import nry.com.pass_in.dto.event.EventResponseDTO;
+import nry.com.pass_in.dto.event.*;
 import nry.com.pass_in.repositories.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,6 +28,11 @@ public class EventService {
         Event event = getEventById(eventId);
         List<Attendee> attendeeList = this.attendeeService.getAllAttendeesFromEvent(eventId);
         return new EventResponseDTO(event, attendeeList.size());
+    }
+
+    public EventListResponseDTO getAllEvents(){
+        List<Event> events = this.eventRepository.findAll();
+        return new EventListResponseDTO(events);
     }
 
     public EventIdDTO createEvent(EventRequestDTO eventDTO){

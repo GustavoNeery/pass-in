@@ -5,6 +5,7 @@ import nry.com.pass_in.dto.attendee.AttendeeIdDTO;
 import nry.com.pass_in.dto.attendee.AttendeeListResponseDTO;
 import nry.com.pass_in.dto.attendee.AttendeeRequestDTO;
 import nry.com.pass_in.dto.event.EventIdDTO;
+import nry.com.pass_in.dto.event.EventListResponseDTO;
 import nry.com.pass_in.dto.event.EventRequestDTO;
 import nry.com.pass_in.dto.event.EventResponseDTO;
 import nry.com.pass_in.services.AttendeeService;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/events")
@@ -29,6 +32,12 @@ public class EventController {
     public ResponseEntity<EventResponseDTO> getEvent(@PathVariable String eventId){
         EventResponseDTO event = this.eventService.getEventDetail(eventId);
         return ResponseEntity.ok(event);
+    }
+
+    @GetMapping
+    public ResponseEntity<EventListResponseDTO> getAllEvents(){
+        EventListResponseDTO events = this.eventService.getAllEvents();
+        return ResponseEntity.ok(events);
     }
 
     @PostMapping
