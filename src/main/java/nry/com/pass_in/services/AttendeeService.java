@@ -72,6 +72,11 @@ public class AttendeeService {
         this.checkInService.registerCheckIn(attendee);
     }
 
+    public void deleteAttendee(String attendeeId){
+        Attendee attendee = this.getAttendee(attendeeId);
+        this.attendeeRepository.delete(attendee);
+    }
+
     private Attendee getAttendee(String attendeeId){
         return this.attendeeRepository.findById(attendeeId).orElseThrow(() -> new AttendeeNotFoundException("Attendee not found with id" + attendeeId));
     }

@@ -28,6 +28,11 @@ public class EventController {
     @Autowired
     private final AttendeeService attendeeService;
 
+    public EventController(EventService eventService, AttendeeService attendeeService) {
+        this.eventService = eventService;
+        this.attendeeService = attendeeService;
+    }
+
     @GetMapping("/{eventId}")
     public ResponseEntity<EventResponseDTO> getEvent(@PathVariable String eventId){
         EventResponseDTO event = this.eventService.getEventDetail(eventId);

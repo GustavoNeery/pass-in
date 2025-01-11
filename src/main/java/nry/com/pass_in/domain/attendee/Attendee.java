@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "attendees")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Attendee {
@@ -20,6 +18,42 @@ public class Attendee {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
     @Column(nullable = false)
     private String name;

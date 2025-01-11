@@ -18,11 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class EventService {
 
     private final EventRepository eventRepository;
     private final AttendeeService attendeeService;
+
+    public EventService(EventRepository eventRepository, AttendeeService attendeeService) {
+        this.eventRepository = eventRepository;
+        this.attendeeService = attendeeService;
+    }
 
     public EventResponseDTO getEventDetail(String eventId){
         Event event = getEventById(eventId);
@@ -37,7 +41,6 @@ public class EventService {
 
     public EventIdDTO createEvent(EventRequestDTO eventDTO){
         Event newEvent = new Event();
-
         newEvent.setTitle(eventDTO.title());
         newEvent.setDetails(eventDTO.details());
         newEvent.setMaximumAttendees(eventDTO.maximumAttendees());

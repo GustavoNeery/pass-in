@@ -40,4 +40,9 @@ public class AttendeeController {
         return ResponseEntity.created(uri).build();
     }
 
+    @DeleteMapping("/{attendeeId}")
+    public ResponseEntity DeleteAttendee(@PathVariable String attendeeId){
+        this.service.deleteAttendee(attendeeId);
+        return ResponseEntity.ok("Attendee removido com sucesso!");
+    }
 }
