@@ -11,6 +11,7 @@ import nry.com.pass_in.dto.event.EventResponseDTO;
 import nry.com.pass_in.services.AttendeeService;
 import nry.com.pass_in.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -62,5 +63,11 @@ public class EventController {
     public ResponseEntity<AttendeeListResponseDTO> getEventAttendees(@PathVariable String eventId){
         AttendeeListResponseDTO attendeeListResponse = this.attendeeService.getEventsAttendee(eventId);
         return ResponseEntity.ok(attendeeListResponse);
+    }
+
+    @DeleteMapping("/{eventId}")
+    public ResponseEntity<Void> deleteEventById(@PathVariable String eventId) {
+        this.eventService.deleteEventById(eventId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

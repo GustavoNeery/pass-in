@@ -27,7 +27,6 @@ public class EventServiceTest {
 
     @Autowired
     private EventService eventService;
-
     private EventIdDTO eventIdDto;
 
     private AttendeeRequestDTO attendeeRequestDTO;

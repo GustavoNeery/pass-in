@@ -16,6 +16,7 @@ import java.text.Normalizer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventService {
@@ -66,6 +67,12 @@ public class EventService {
 
         return new AttendeeIdDTO(newAttendee.getId());
     }
+
+    public void deleteEventById(String eventId) {
+        getEventById(eventId);
+        this.eventRepository.deleteById(eventId);
+    }
+
 
     private Event getEventById(String eventId){
         return this.eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException("Event not found with ID: " + eventId));
