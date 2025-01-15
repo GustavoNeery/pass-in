@@ -19,7 +19,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/events")
-@RequiredArgsConstructor
 public class EventController {
 
     @Autowired

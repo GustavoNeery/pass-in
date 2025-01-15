@@ -13,22 +13,29 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@SpringBootTest
 public class EventServiceTest {
+
     private EventRequestDTO event;
+
+    @Autowired
     private EventService eventService;
-    private AttendeeService attendeeService;
-    private EventController eventController;
-    private Attendee attendee;
+
     private EventIdDTO eventIdDto;
+
     private AttendeeRequestDTO attendeeRequestDTO;
     private AttendeeRequestDTO attendeeRequestDTO2;
+
     @BeforeEach
     void setup() {
-        event = new EventRequestDTO("viagem", "esse é o primeiro evento", 1);
+        event = new EventRequestDTO("viagem2", "esse é o primeiro evento", 1);
         eventIdDto = eventService.createEvent(event);
 
 
@@ -41,7 +48,6 @@ public class EventServiceTest {
     @DisplayName("teste inicial")
     void shouldIncrementAttendeeNumberWhenAddNewAttendee() {
         eventService.registerAttendeeOnEvent(eventIdDto.eventId(), attendeeRequestDTO);
-        eventService.registerAttendeeOnEvent(eventIdDto.eventId(), attendeeRequestDTO2);
 
        Assertions.assertEquals("Event is full", eventService.registerAttendeeOnEvent(eventIdDto.eventId(), attendeeRequestDTO2));
     }
