@@ -2,6 +2,7 @@ package nry.com.pass_in.domain;
 
 import nry.com.pass_in.controllers.EventController;
 import nry.com.pass_in.domain.attendee.Attendee;
+import nry.com.pass_in.domain.attendee.exceptions.EventFullException;
 import nry.com.pass_in.domain.event.Event;
 import nry.com.pass_in.dto.attendee.AttendeeRequestDTO;
 import nry.com.pass_in.dto.event.EventIdDTO;
@@ -16,6 +17,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import nry.com.pass_in.domain.attendee.exceptions.EventFullException;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,7 +37,7 @@ public class EventServiceTest {
 
     @BeforeEach
     void setup() {
-        event = new EventRequestDTO("viagem2", "esse é o primeiro evento", 1);
+        event = new EventRequestDTO("viagem5", "esse é o primeiro evento", 1);
         eventIdDto = eventService.createEvent(event);
 
 
@@ -48,6 +51,10 @@ public class EventServiceTest {
     void shouldIncrementAttendeeNumberWhenAddNewAttendee() {
         eventService.registerAttendeeOnEvent(eventIdDto.eventId(), attendeeRequestDTO);
 
-       Assertions.assertEquals("Event is full", eventService.registerAttendeeOnEvent(eventIdDto.eventId(), attendeeRequestDTO2));
+        EventFullException exception = Assertions.assertThrows(
+                EventFullException.class,
+                () -> eventService.registerAttendeeOnEvent(eventIdDto.eventId(), attendeeRequestDTO2)
+        );
+        Assertions.assertTrue(exception.getMessage().contains("Event is full"));
     }
 }

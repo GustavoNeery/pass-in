@@ -1,8 +1,8 @@
 /*C12*/SET SCHEMA PUBLIC
 SET SCHEMA "PUBLIC"
-INSERT INTO EVENTS VALUES('cf65daec-1946-49ff-892d-2484e64c15f3','viagem2','esse \u00e9 o primeiro evento','viagem2',1)
+INSERT INTO EVENTS VALUES('87ceb9f5-beed-448e-ab36-b9866bc28a09','viagem5','esse \u00e9 o primeiro evento','viagem5',1)
 COMMIT
-INSERT INTO ATTENDEES VALUES('0ca1fbd1-d39e-4698-92cf-32c5f4c0b5fd','Ivna','ivnavelezteste@gmail.com','cf65daec-1946-49ff-892d-2484e64c15f3','2025-01-15 19:35:50.539715')
+INSERT INTO ATTENDEES VALUES('7ddc6d33-5035-4b91-b1e2-3aecd13cd972','Ivna','ivnavelezteste@gmail.com','87ceb9f5-beed-448e-ab36-b9866bc28a09','2025-01-22 23:23:32.067063')
 COMMIT
 DISCONNECT
 /*C13*/SET SCHEMA PUBLIC
