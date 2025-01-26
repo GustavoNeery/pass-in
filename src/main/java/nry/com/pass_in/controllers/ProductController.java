@@ -32,4 +32,9 @@ public class ProductController {
         return productRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Product findById(@PathVariable String id) {
+        return productRepository.findById(id);
+    }
+
 }
